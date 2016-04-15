@@ -21,7 +21,7 @@ class tagged(object):
 		def inner(request, *a, **kw):
 			raw_tags = request.config.getoption(self.tag_name)
 			if raw_tags:
-				required_tags = set(raw_tags.split(','))
+				required_tags = set(raw_tags)
 				# TODO: can implement shouldn't have tags relying on ! or ~ prefix
 				missing_req = required_tags - self.tags
 				if missing_req:
@@ -57,7 +57,6 @@ def pytest_addoption(parser):
 	for option_name, values in tagged.options.items():
 		arg_name = '--%s' % option_name.replace('_', '-')
 		parser.addoption(
-			arg_name, action="store", dest=option_name,
-			# TODO: choices would be cool, but need to learn how to accept multi value
-			#choices=values,
+			arg_name, action="store", dest=option_name, metavar='label', nargs='+',
+			choices=values,
 			default=None, help="filter %s fixtures (tags)" % option_name)
