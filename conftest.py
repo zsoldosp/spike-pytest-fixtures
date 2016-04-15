@@ -2,6 +2,7 @@ import pytest
 import _pytest
 from functools import wraps
 
+### infra 1
 
 class tagged(object):
 
@@ -70,7 +71,7 @@ def partner_billing_and_delivery(request):
 def checkout_address(request):
 	return request.param(request)
 
-### infra
+### infra 2
 
 def pytest_addoption(parser):
 	for option_name, values in tagged.options.items():
