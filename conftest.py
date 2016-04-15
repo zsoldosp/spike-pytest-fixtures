@@ -4,6 +4,7 @@ from functools import wraps
 
 ### infra 1
 
+# TODO: this approach doesn't work with --collect-only
 class tagged(object):
 
 	options = {}
