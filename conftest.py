@@ -32,6 +32,19 @@ class tagged(object):
 
 ### cart
 
+@pytest.fixture
+@tagged(cart_item=['maintenance', '1yearmaint', '100'])
+def maint_100_1_year_item(request):
+	return dict(article='100', maint_years=1)
+
+@pytest.fixture
+@tagged(cart_item=['maintenance', '1yearmaint', '500'])
+def maint_500_1_year_item(request):
+	return dict(article='500', maint_years=1)
+
+@pytest.fixture(params=[maint_100_1_year_item, maint_500_1_year_item])
+def maint_item(request):
+	return request.param(request)
 
 @pytest.fixture
 @tagged(cart_item=['newlicense', '1yearmaint', '100'])
@@ -45,6 +58,10 @@ def new_lic_500_1_year_item(request):
 
 @pytest.fixture(params=[new_lic_100_1_year_item, new_lic_500_1_year_item])
 def new_lic_item(request):
+	return request.param(request)
+
+@pytest.fixture(params=(new_lic_item._pytestfixturefunction.params + maint_item._pytestfixturefunction.params))
+def cart_item(request):
 	return request.param(request)
 
 ### checkout_address
