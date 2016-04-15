@@ -105,6 +105,12 @@ def payment_banktransfer(request):
 def payment(request):
 	return request.param(request)
 
+### order
+
+@pytest.fixture
+def order(cart_item, checkout_address, payment):
+	return dict(cart=cart_item, addresses=checkout_address, payment=payment)
+
 ### infra 2
 
 def pytest_addoption(parser):

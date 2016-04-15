@@ -9,4 +9,5 @@ def test_payment(payment):
 def test_addresses(checkout_address):
 	assert False, checkout_address
 
-
+def test_order(order):
+	assert False, order
