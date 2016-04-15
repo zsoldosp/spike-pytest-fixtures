@@ -31,19 +31,19 @@ class tagged(object):
 
 
 @pytest.fixture
-@tagged(tags=['enduser', 'billing'])
+@tagged(checkout_address=['enduser', 'billing'])
 def end_user_billing_only(request):
 	return dict(billing='billing', delivery=None)
 
 
 @pytest.fixture
-@tagged(tags=['enduser', 'billing', 'delivery'])
+@tagged(checkout_address=['enduser', 'billing', 'delivery'])
 def end_user_billing_and_delivery(request):
 	return dict(billing='billing', delivery='delivery')
 
 
 @pytest.fixture
-@tagged(tags=['partner', 'billing', 'delivery'])
+@tagged(checkout_address=['partner', 'billing', 'delivery'])
 def partner_billing_and_delivery(request):
 	return dict(partner='some partner', billing='billing', delivery='delivery')
 
