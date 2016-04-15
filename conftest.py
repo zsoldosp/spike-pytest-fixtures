@@ -24,7 +24,7 @@ class tagged(object):
 			raw_tags = request.config.getoption(self.tag_name)
 			if raw_tags:
 				required_tags = set(raw_tags)
-				# TODO: can implement shouldn't have tags relying on ! or ~ prefix
+				# TODO: can implement shouldn't have tags relying on '~' prefix (don't use '!' as that interferes with bash)
 				missing_req = required_tags - self.tags
 				if missing_req:
 					_pytest.runner.skip('not applicable due to tags')
