@@ -1,0 +1,8 @@
+*~
+*.swp
+*.py[co]
+# virtualenv
+pytest-fixtures
+# locally cloned src repo
+pytest-github  
+.cache
