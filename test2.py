@@ -15,7 +15,5 @@ def new_lic():
 	yield new_lic_500_1_year_item()
 
 def test_addresses(checkout_address):
-	if not checkout_address:
-		return
 	assert False, checkout_address
 
