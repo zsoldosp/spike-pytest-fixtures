@@ -30,6 +30,9 @@ class tagged(object):
 			return func(request, *a, **kw)
 		return inner
 
+def idfn(fixture_value):
+	return fixture_value.__name__
+
 ### cart
 
 @pytest.fixture
@@ -56,11 +59,11 @@ def new_lic_100_1_year_item(request):
 def new_lic_500_1_year_item(request):
 	return dict(article='500', maint_years=1)
 
-@pytest.fixture(params=[new_lic_100_1_year_item, new_lic_500_1_year_item])
+@pytest.fixture(params=[new_lic_100_1_year_item, new_lic_500_1_year_item], ids=idfn)
 def new_lic_item(request):
 	return request.param(request)
 
-@pytest.fixture(params=(new_lic_item._pytestfixturefunction.params + maint_item._pytestfixturefunction.params))
+@pytest.fixture(params=(new_lic_item._pytestfixturefunction.params + maint_item._pytestfixturefunction.params), ids=idfn)
 def cart_item(request):
 	return request.param(request)
 
@@ -84,7 +87,7 @@ def partner_billing_and_delivery(request):
 	return dict(partner='some partner', billing='billing', delivery='delivery')
 
 
-@pytest.fixture(params=[end_user_billing_only, end_user_billing_and_delivery, partner_billing_and_delivery])
+@pytest.fixture(params=[end_user_billing_only, end_user_billing_and_delivery, partner_billing_and_delivery], ids=idfn)
 def checkout_address(request):
 	return request.param(request)
 
@@ -101,7 +104,7 @@ def payment_creditcard(request):
 def payment_banktransfer(request):
 	return 'banktransfer'
 
-@pytest.fixture(params=[payment_creditcard, payment_banktransfer])
+@pytest.fixture(params=[payment_creditcard, payment_banktransfer], ids=idfn)
 def payment(request):
 	return request.param(request)
 
