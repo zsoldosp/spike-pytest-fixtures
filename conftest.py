@@ -88,6 +88,23 @@ def partner_billing_and_delivery(request):
 def checkout_address(request):
 	return request.param(request)
 
+
+### payment option
+
+@pytest.fixture
+@tagged(payment_option=['creditcard'])
+def payment_creditcard(request):
+	return 'creditcard'
+
+@pytest.fixture
+@tagged(payment_option=['banktransfer'])
+def payment_banktransfer(request):
+	return 'banktransfer'
+
+@pytest.fixture(params=[payment_creditcard, payment_banktransfer])
+def payment(request):
+	return request.param(request)
+
 ### infra 2
 
 def pytest_addoption(parser):
