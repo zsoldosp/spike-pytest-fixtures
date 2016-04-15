@@ -29,6 +29,24 @@ class tagged(object):
 			return func(request, *a, **kw)
 		return inner
 
+### cart
+
+
+@pytest.fixture
+@tagged(cart_item=['newlicense', '1yearmaint', '100'])
+def new_lic_100_1_year_item(request):
+	return dict(article='100', maint_years=1)
+
+@pytest.fixture
+@tagged(cart_item=['newlicense', '1yearmaint', '500'])
+def new_lic_500_1_year_item(request):
+	return dict(article='500', maint_years=1)
+
+@pytest.fixture(params=[new_lic_100_1_year_item, new_lic_500_1_year_item])
+def new_lic_item(request):
+	return request.param(request)
+
+### checkout_address
 
 @pytest.fixture
 @tagged(checkout_address=['enduser', 'billing'])
@@ -52,6 +70,7 @@ def partner_billing_and_delivery(request):
 def checkout_address(request):
 	return request.param(request)
 
+### infra
 
 def pytest_addoption(parser):
 	for option_name, values in tagged.options.items():
