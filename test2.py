@@ -1,5 +1,3 @@
-import pytest
-
 def test_items(cart_item):
 	assert False, cart_item
 
